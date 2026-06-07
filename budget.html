@@ -10,22 +10,15 @@
 <title>Сколько нужно для счастья?</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --accent: #c0392b;
-    --card: #ffffff;
-    --text: #1a1a2e;
-  }
+  :root { --accent: #c0392b; --card: #ffffff; --text: #1a1a2e; }
 
   body {
     font-family: -apple-system, 'Helvetica Neue', sans-serif;
     background: #f5f0e8;
     min-height: 100vh;
-    min-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 0 env(safe-area-inset-bottom, 40px);
     padding-bottom: max(40px, env(safe-area-inset-bottom));
   }
 
@@ -36,91 +29,29 @@
     text-align: center;
     margin-bottom: 24px;
   }
+  header h1 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 0.5px; line-height: 1.3; text-transform: uppercase; }
 
-  header h1 {
-    font-size: 20px;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 0.5px;
-    line-height: 1.3;
-    text-transform: uppercase;
-  }
+  .container { width: 100%; max-width: 520px; padding: 0 16px; }
 
-  .container {
-    width: 100%;
-    max-width: 520px;
-    padding: 0 16px;
-  }
-
-  .input-block {
-    background: var(--card);
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    text-align: center;
-  }
-
-  .input-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 10px;
-  }
-
-  .input-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: 2.5px solid var(--accent);
-    border-radius: 12px;
-    padding: 12px 18px;
-  }
-
-  .input-row input {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text);
-    border: none;
-    outline: none;
-    background: transparent;
-    width: 100%;
-    text-align: center;
-    min-width: 0;
-    -webkit-appearance: none;
-  }
-
+  .input-block { background: var(--card); border-radius: 16px; padding: 18px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
+  .input-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .input-row { display: flex; align-items: center; justify-content: center; gap: 8px; border: 2.5px solid var(--accent); border-radius: 12px; padding: 12px 18px; }
+  .input-row input { font-size: 28px; font-weight: 700; color: var(--text); border: none; outline: none; background: transparent; width: 100%; text-align: center; -webkit-appearance: none; }
   .input-row input::placeholder { color: #ccc; }
+  .currency { font-size: 24px; font-weight: 700; color: var(--text); flex-shrink: 0; }
 
-  .currency {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text);
-    flex-shrink: 0;
-  }
-
-  .table-card {
-    background: var(--card);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  }
+  .table-card { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
 
   .section-header {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    height: 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px 0 16px; height: 40px;
   }
-
-  .section-header span {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+  .section-header span { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+  .add-btn {
+    background: rgba(0,0,0,0.15); border: none; border-radius: 50%;
+    width: 24px; height: 24px; font-size: 18px; line-height: 1;
+    color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; padding: 0;
   }
 
   .needs-header { background: #a8c880; }
@@ -132,123 +63,94 @@
 
   .row {
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto auto auto;
     align-items: center;
-    padding: 13px 16px;
-    gap: 8px;
+    padding: 11px 12px 11px 16px;
+    gap: 6px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
   }
-
-  .row:last-child { border-bottom: none; }
-
-  .row-left {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-  }
-
-  .row-icon { font-size: 17px; flex-shrink: 0; }
-
+  .row-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .row-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
+    font-size: 14px; font-weight: 600; color: var(--text);
+    border: none; background: transparent; outline: none;
+    min-width: 0; width: 100%;
+    border-bottom: 1px dashed transparent;
+    padding: 1px 0;
   }
+  .row-name:focus { border-bottom-color: #bbb; }
 
-  .row-pct {
-    display: flex;
-    align-items: center;
-    gap: 1px;
-  }
-
+  .row-pct { display: flex; align-items: center; gap: 1px; }
   .pct-input {
-    font-size: 14px;
-    font-weight: 700;
-    color: #777;
-    border: none;
-    border-bottom: 1px dashed #bbb;
-    outline: none;
-    background: transparent;
-    width: 36px;
-    text-align: right;
-    padding: 2px;
-    -webkit-appearance: none;
+    font-size: 14px; font-weight: 700; color: #777;
+    border: none; border-bottom: 1px dashed #bbb; outline: none;
+    background: transparent; width: 36px; text-align: right;
+    padding: 2px; -webkit-appearance: none;
   }
-
   .pct-input:focus { color: var(--accent); border-bottom-color: var(--accent); }
   .pct-symbol { font-size: 13px; color: #999; font-weight: 700; }
 
-  .row-amount {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    text-align: right;
-    min-width: 76px;
+  .row-amount { font-size: 13px; font-weight: 700; color: var(--text); text-align: right; min-width: 70px; }
+
+  .del-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 18px; color: #ccc; padding: 0 2px;
+    line-height: 1; flex-shrink: 0;
   }
+  .del-btn:active { color: var(--accent); }
 
   .needs-row { background: #eef6e6; }
-  .needs-row:nth-child(even) { background: #e4f0d8; }
   .wants-row { background: #e6ecf6; }
-  .wants-row:nth-child(even) { background: #d8e4f0; }
   .invest-row { background: #fdf6d8; }
 
   .total-row {
-    background: #2a2a3e;
-    padding: 15px 16px;
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 8px;
+    background: #2a2a3e; padding: 15px 16px;
+    display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px;
   }
-
   .total-label { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
   .total-pct { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.55); text-align: right; }
   .total-amount { font-size: 16px; font-weight: 800; color: #fff; text-align: right; min-width: 76px; }
 
   .divider { height: 1px; background: rgba(0,0,0,0.06); }
+  .warn { text-align: center; font-size: 12px; color: var(--accent); font-weight: 700; margin-top: 10px; min-height: 18px; }
+  .hint { text-align: center; font-size: 11px; color: #aaa; margin-top: 8px; font-style: italic; padding-bottom: 10px; }
 
-  .warn {
-    text-align: center;
-    font-size: 12px;
-    color: var(--accent);
-    font-weight: 700;
-    margin-top: 10px;
-    min-height: 18px;
-  }
-
-  .hint {
-    text-align: center;
-    font-size: 11px;
-    color: #aaa;
-    margin-top: 8px;
-    font-style: italic;
-    padding-bottom: 10px;
-  }
-
-  .install-tip {
-    margin-top: 20px;
-    background: #fff8e1;
-    border: 1px solid #ffe082;
-    border-radius: 12px;
-    padding: 14px 16px;
-    font-size: 13px;
-    color: #5d4037;
-    line-height: 1.5;
-    text-align: center;
-  }
-
+  .install-tip { margin-top: 20px; background: #fff8e1; border: 1px solid #ffe082; border-radius: 12px; padding: 14px 16px; font-size: 13px; color: #5d4037; line-height: 1.5; text-align: center; }
   .install-tip b { display: block; margin-bottom: 4px; font-size: 14px; }
   .install-tip.hidden { display: none; }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 100;
+    align-items: flex-end; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 20px 20px 0 0;
+    padding: 24px 20px max(24px, env(safe-area-inset-bottom));
+    width: 100%; max-width: 520px;
+  }
+  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+  .modal input[type=text] {
+    width: 100%; font-size: 16px; padding: 12px 14px;
+    border: 1.5px solid #ddd; border-radius: 10px; outline: none;
+    margin-bottom: 10px; color: var(--text);
+  }
+  .modal input[type=text]:focus { border-color: var(--accent); }
+  .modal-row { display: flex; gap: 10px; }
+  .modal-btn {
+    flex: 1; padding: 13px; border: none; border-radius: 12px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+  .modal-btn.cancel { background: #f0f0f0; color: #666; }
+  .modal-btn.confirm { background: var(--accent); color: #fff; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Сколько нужно<br>для счастья?</h1>
-</header>
+<header><h1>Сколько нужно<br>для счастья?</h1></header>
 
 <div class="container">
-
   <div class="input-block">
     <div class="input-label">Ваш бюджет</div>
     <div class="input-row">
@@ -258,50 +160,71 @@
   </div>
 
   <div class="table-card">
-
-    <div class="section-header needs-header"><span>🏠 Потребности</span></div>
-    <div class="row needs-row">
-      <div class="row-left"><span class="row-icon">🏠</span><span class="row-name">Аренда</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="rent" value="40" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-rent">—</div>
+    <div class="section-header needs-header">
+      <span>🏠 Потребности</span>
+      <button class="add-btn" onclick="openModal('needs')">+</button>
     </div>
-    <div class="row needs-row">
-      <div class="row-left"><span class="row-icon">🛒</span><span class="row-name">Продукты</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="food" value="18" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-food">—</div>
-    </div>
-    <div class="row needs-row">
-      <div class="row-left"><span class="row-icon">📱</span><span class="row-name">Связь</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="comm" value="5" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-comm">—</div>
-    </div>
-    <div class="row needs-row">
-      <div class="row-left"><span class="row-icon">💊</span><span class="row-name">Лекарства</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="med" value="10" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-med">—</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="section-header wants-header"><span>🛍 Желания</span></div>
-    <div class="row wants-row">
-      <div class="row-left"><span class="row-icon">👕</span><span class="row-name">Шопинг</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="shop" value="10" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-shop">—</div>
-    </div>
-    <div class="row wants-row">
-      <div class="row-left"><span class="row-icon">🎬</span><span class="row-name">Развлечения</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="ent" value="8" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-ent">—</div>
+    <div id="needs-body">
+      <div class="row needs-row">
+        <div class="row-left"><input class="row-name" value="Аренда" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="40" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
+      <div class="row needs-row">
+        <div class="row-left"><input class="row-name" value="Продукты" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="18" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
+      <div class="row needs-row">
+        <div class="row-left"><input class="row-name" value="Связь" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="5" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
+      <div class="row needs-row">
+        <div class="row-left"><input class="row-name" value="Лекарства" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="10" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
     </div>
 
     <div class="divider"></div>
 
-    <div class="section-header invest-header"><span>📈 Инвестиции</span></div>
-    <div class="row invest-row">
-      <div class="row-left"><span class="row-icon">📈</span><span class="row-name">Инвестиции</span></div>
-      <div class="row-pct"><input class="pct-input" data-id="inv" value="9" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
-      <div class="row-amount" id="amt-inv">—</div>
+    <div class="section-header wants-header">
+      <span>🛍 Желания</span>
+      <button class="add-btn" onclick="openModal('wants')">+</button>
+    </div>
+    <div id="wants-body">
+      <div class="row wants-row">
+        <div class="row-left"><input class="row-name" value="Шопинг" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="10" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
+      <div class="row wants-row">
+        <div class="row-left"><input class="row-name" value="Развлечения" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="8" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-header invest-header">
+      <span>📈 Инвестиции</span>
+      <button class="add-btn" onclick="openModal('invest')">+</button>
+    </div>
+    <div id="invest-body">
+      <div class="row invest-row">
+        <div class="row-left"><input class="row-name" value="Инвестиции" oninput="calc()"></div>
+        <div class="row-pct"><input class="pct-input" value="9" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+        <div class="row-amount">—</div>
+        <button class="del-btn" onclick="delRow(this)">×</button>
+      </div>
     </div>
 
     <div class="total-row">
@@ -309,64 +232,102 @@
       <div class="total-pct" id="total-pct">100%</div>
       <div class="total-amount" id="total-amt">—</div>
     </div>
-
   </div>
 
   <div class="warn" id="warn"></div>
-  <div class="hint">Проценты можно изменять — просто нажмите на цифру</div>
+  <div class="hint">Нажми × чтобы удалить · + чтобы добавить · цифру чтобы изменить %</div>
 
   <div class="install-tip" id="install-tip">
     <b>📲 Добавить на рабочий стол</b>
-    Нажми <b>Поделиться</b> → <b>«На экран «Домой»</b> — и приложение появится на рабочем столе!
+    Нажми <b>Поделиться</b> → <b>«На экран «Домой»</b>
   </div>
+</div>
 
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <h3 id="modal-title">Новый пункт</h3>
+    <input type="text" id="modal-name" placeholder="Название (например: Такси)" />
+    <input type="number" id="modal-pct" placeholder="Процент (например: 5)" inputmode="numeric" min="0" max="100" />
+    <div class="modal-row">
+      <button class="modal-btn cancel" onclick="closeModal()">Отмена</button>
+      <button class="modal-btn confirm" onclick="addRow()">Добавить</button>
+    </div>
+  </div>
 </div>
 
 <script>
-  const ids = ['rent','food','comm','med','shop','ent','inv'];
+  let currentSection = 'needs';
 
-  function fmt(n) {
-    return Math.round(n).toLocaleString('ru-RU') + ' ₽';
-  }
+  function fmt(n) { return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
 
   function calc() {
     const budget = parseFloat(document.getElementById('budget').value) || 0;
     let totalPct = 0;
-
-    ids.forEach(id => {
-      const pct = parseFloat(document.querySelector('[data-id="' + id + '"]').value) || 0;
+    document.querySelectorAll('.row').forEach(row => {
+      const pctInput = row.querySelector('.pct-input');
+      const amtDiv = row.querySelector('.row-amount');
+      if (!pctInput || !amtDiv) return;
+      const pct = parseFloat(pctInput.value) || 0;
       totalPct += pct;
-      const amount = budget * pct / 100;
-      document.getElementById('amt-' + id).textContent = budget > 0 ? fmt(amount) : '—';
+      amtDiv.textContent = budget > 0 ? fmt(budget * pct / 100) : '—';
     });
-
     document.getElementById('total-pct').textContent = totalPct + '%';
     document.getElementById('total-amt').textContent = budget > 0 ? fmt(budget) : '—';
-
-    const warn = document.getElementById('warn');
-    warn.textContent = totalPct !== 100 ? '⚠️ Сумма процентов: ' + totalPct + '% (должно быть 100%)' : '';
+    document.getElementById('warn').textContent = totalPct !== 100 ? '⚠️ Сумма: ' + totalPct + '% (должно быть 100%)' : '';
   }
 
-  // Скрываем подсказку если уже запущено как PWA
+  function delRow(btn) {
+    const row = btn.closest('.row');
+    row.remove();
+    calc();
+  }
+
+  function openModal(section) {
+    currentSection = section;
+    document.getElementById('modal-name').value = '';
+    document.getElementById('modal-pct').value = '';
+    document.getElementById('modal').classList.add('open');
+    setTimeout(() => document.getElementById('modal-name').focus(), 100);
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modal')) {
+      document.getElementById('modal').classList.remove('open');
+    }
+  }
+
+  function addRow() {
+    const name = document.getElementById('modal-name').value.trim();
+    const pct = document.getElementById('modal-pct').value.trim();
+    if (!name) { document.getElementById('modal-name').focus(); return; }
+
+    const cls = currentSection + '-row';
+    const div = document.createElement('div');
+    div.className = 'row ' + cls;
+    div.innerHTML = `
+      <div class="row-left"><input class="row-name" value="${name}" oninput="calc()"></div>
+      <div class="row-pct"><input class="pct-input" value="${pct || 0}" inputmode="numeric" oninput="calc()"><span class="pct-symbol">%</span></div>
+      <div class="row-amount">—</div>
+      <button class="del-btn" onclick="delRow(this)">×</button>
+    `;
+    document.getElementById(currentSection + '-body').appendChild(div);
+    document.getElementById('modal').classList.remove('open');
+    calc();
+  }
+
   if (window.navigator.standalone) {
     document.getElementById('install-tip').classList.add('hidden');
   }
 
-  // Service Worker для оффлайн режима
   if ('serviceWorker' in navigator) {
     const swCode = `
-      const CACHE = 'budget-v1';
-      self.addEventListener('install', e => {
-        e.waitUntil(caches.open(CACHE).then(c => c.addAll(['/'])));
-        self.skipWaiting();
-      });
-      self.addEventListener('fetch', e => {
-        e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
-      });
+      const CACHE = 'budget-v2';
+      self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(['/']))); self.skipWaiting(); });
+      self.addEventListener('fetch', e => { e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))); });
     `;
     const blob = new Blob([swCode], { type: 'application/javascript' });
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).catch(() => {});
+    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
   }
 
   calc();
